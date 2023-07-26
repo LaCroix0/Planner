@@ -11,8 +11,7 @@ namespace Planner
         public int Id { get; set; }
         public decimal Balance { get; set; }
         public static List<Account> Accounts = new ();
-        public List<Income> Incomes { get; set; } = new ();
-        public List<Expense> Expenses { get; set; } = new ();
+        public List<Operation> Operations { get; set; } = new ();
         public Account(decimal balance)
         {
             if (Accounts.Count == 0) Id = 0;
@@ -44,9 +43,9 @@ namespace Planner
 
         public void ShowAccountOperations()
         {
-            foreach (Income income in Incomes)
+            foreach (Operation operation in Operations)
             {
-                Console.WriteLine(income);
+                Console.WriteLine(operation);
             }
             Console.WriteLine("---------------------------------- \n");
         }

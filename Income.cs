@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,15 +10,14 @@ namespace Planner
     internal class Income : Operation
     {
         public string? Description { get; set; }
-        public static List<Income> Incomes { get; set; } = new();
-
-        public Income(decimal operationDecimal, string? description)
+        public Income(decimal operationDecimal, string? description): base(operationDecimal)
         {
-            if (Incomes.Count == 0) Id = 0;
-            else Id = Incomes.Max(e => e.Id) + 1;
-            OperationDecimal = operationDecimal;
             Description = description;
-            Incomes.Add(this);
+        }
+
+        public Income()
+        {
+
         }
 
         public override string ToString()
@@ -27,8 +27,34 @@ namespace Planner
 
         public static void AddIncome(Account? account, decimal operationDecimal, string? description)
         {
-            if(account == null) throw new ArgumentNullException("You can't add income without selected account.");
-            account.Incomes.Add(new Income(operationDecimal, description));
+            var addedOperation = new Income(operationDecimal, description);
+
+            account.Operations.Add(addedOperation);
+            
+            Console.WriteLine($"Operation {addedOperation} has been added.");
+        }
+
+        public static void RemoveIncome(Account? account)
+        {
+            Console.WriteLine("List of incomes for selected account: ");
+            foreach (var operation in account.Operations)
+            {
+                var income = (Income)operation;
+                Console.WriteLine(income);
+            }
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Please provide Id of an operation you wish to delete.");
+
+            var inputId = Console.ReadLine();
+            int.TryParse(inputId, out var operationId);
+            
+
+            var removedOperation = account.Operations.First(e => e.Id == operationId);
+            account.Operations.Remove(removedOperation);
+
+            Console.Clear();
+
+            Console.WriteLine($"Operation {removedOperation} has been deleted.");
         }
 
     }
