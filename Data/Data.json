@@ -11,21 +11,9 @@
       },
       {
         "$type": "income",
-        "description": "cipa",
+        "description": "dupaa",
         "id": 1,
         "operationDecimal": 2000
-      },
-      {
-        "$type": "income",
-        "description": "a",
-        "id": 3,
-        "operationDecimal": 10101
-      },
-      {
-        "$type": "income",
-        "description": "b",
-        "id": 4,
-        "operationDecimal": 20202
       },
       {
         "$type": "expense",
@@ -38,12 +26,6 @@
         "category": 2,
         "id": 5,
         "operationDecimal": 10101010101
-      },
-      {
-        "$type": "income",
-        "description": "b",
-        "id": 0,
-        "operationDecimal": 1
       }
     ]
   },
